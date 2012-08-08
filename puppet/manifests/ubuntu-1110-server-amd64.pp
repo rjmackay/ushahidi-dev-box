@@ -87,10 +87,12 @@ service { "apache2":
 exec { "apache2-reload":
   command     => "service apache2 reload",
   refreshonly => true,
+  require => Package["apache2"],
 }
 exec { "apache2-mod-rewrite":
   command     => "a2enmod rewrite",
   notify => [Exec["apache2-reload"], ],
+  require => Package["apache2"],
 }
 
 #@todo: disable default site
