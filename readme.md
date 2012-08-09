@@ -1,8 +1,11 @@
 Vagrant + Puppet development setup
 ==================================
 
-Deploys apache2 and php with the required extensions for running Ushahidi.
-Also installs php unit so you can run Ushahidi unit tests.
+Deploys apache2 and php with the required extensions for running Ushahidi, 
+installs php unit so you can run Ushahidi unit tests, and mounts the root directory
+to /var/www/ (over nfs)
+
+Drop these files into your ushahidi doc root and deploy from there.
 
 Requirements:
 * Vagrant (http://vagrantup.com/)
