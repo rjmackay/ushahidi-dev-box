@@ -23,7 +23,8 @@ exec { "apt-get_update":
 exec { "apt-get_upgrade":
     command     => "/usr/bin/apt-get -y upgrade",
     require     => [ Exec["apt-get_update"] ],
-    tries       => 3
+    tries       => 3,
+    refreshonly => true
 }
 
 file { "norecommends":
