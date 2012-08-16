@@ -9,8 +9,10 @@ Vagrant::Config.run do |config|
   config.vm.box = "precise64"
   config.vm.box_url = "http://files.vagrantup.com/precise64.box"
   config.vm.customize ["modifyvm", :id, "--memory", "512"]
-  config.vm.network :hostonly, "192.168.33.13"
+  config.vm.network :hostonly, "192.168.33.10"
   config.vm.share_folder "www", "/var/www", ".", :nfs => true
+  config.ssh.port = 2200
+  config.vm.forward_port 22, 2200
 
   # Puppet provisioning
   config.vm.provision :puppet do |puppet|
