@@ -1,6 +1,5 @@
 class php {
   $php_packages = [
-      "php5-mysql",
       "php5-mysqlnd",
       "php5-mcrypt",
       "php5-curl",
@@ -10,7 +9,7 @@ class php {
       "php5-xdebug",
       "php5-cli",
       "php-pear",
-      "php"
+      "php5"
   ]
   
   Package {
