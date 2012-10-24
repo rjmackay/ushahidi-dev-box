@@ -33,5 +33,23 @@ class apache2 {
     notify => [Exec["apache2-reload"], ],
     require => Package["apache2"],
   }
+  exec { "apache2-dissite-default":
+    command     => "a2dissite default",
+    notify => [Exec["apache2-reload"], ],
+    require => Package["apache2"],
+  }
+  exec { "apache2-ensite":
+    command     => "a2ensite ushahidi",
+    notify => [Exec["apache2-reload"], ],
+    require => [ Package["apache2"], File["/etc/apache2/sites-available/ushahidi"] ],
+  }
+  file { "/etc/apache2/sites-available/ushahidi":
+    ensure  => "present",
+    owner   => "root",
+    group   => "root",
+    mode    => 444,
+    content => template("ushahidi.erb"),
+    require => Package["apache2"],
+  }
 
 }
