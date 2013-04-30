@@ -10,8 +10,13 @@ class phpunit {
     require => Package["php-pear"],
     returns => [0,1]
   }
-  exec {"pear-channel-symphony":
+  exec {"pear-channel-symfony-project":
     command => "pear channel-discover pear.symfony-project.com",
+    require => Package["php-pear"],
+    returns => [0,1]
+  }
+  exec {"pear-channel-symfony":
+    command => "pear channel-discover pear.symfony.com",
     require => Package["php-pear"],
     returns => [0,1]
   }
@@ -19,7 +24,8 @@ class phpunit {
     command => "pear update-channels",
     require => [ Exec["pear-channel-phpunit"],
                 Exec["pear-channel-ezno"],
-                Exec["pear-channel-symphony"],
+                Exec["pear-channel-symfony"],
+                Exec["pear-channel-symfony-project"],
                 Package["php-pear"],
                ]
   }
@@ -27,7 +33,8 @@ class phpunit {
     command => "pear upgrade",
     require => [ Exec["pear-channel-phpunit"],
                 Exec["pear-channel-ezno"],
-                Exec["pear-channel-symphony"],
+                Exec["pear-channel-symfony"],
+                Exec["pear-channel-symfony-project"],
                 Exec["pear-update-channels"],
                 Package["php-pear"],
                ]
@@ -36,7 +43,8 @@ class phpunit {
     command => "pear install --alldeps phpunit/PHPUnit",
     require => [ Exec["pear-channel-phpunit"],
                 Exec["pear-channel-ezno"],
-                Exec["pear-channel-symphony"],
+                Exec["pear-channel-symfony"],
+                Exec["pear-channel-symfony-project"],
                 Exec["pear-update-channels"],
                 Exec["pear-upgrade"],
                 Package["php-pear"],
