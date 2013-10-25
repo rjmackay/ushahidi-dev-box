@@ -1,4 +1,4 @@
-class phpunit {
+class base::phpunit {
   # phpunit
   exec {"pear-channel-phpunit":
     command => "pear channel-discover pear.phpunit.de",
@@ -40,7 +40,7 @@ class phpunit {
                ]
   }
   exec {"pear-install-phpunit": 
-    command => "pear install --alldeps phpunit/PHPUnit",
+    command => "pear install --soft --alldeps phpunit/PHPUnit",
     require => [ Exec["pear-channel-phpunit"],
                 Exec["pear-channel-ezno"],
                 Exec["pear-channel-symfony"],
@@ -48,12 +48,14 @@ class phpunit {
                 Exec["pear-update-channels"],
                 Exec["pear-upgrade"],
                 Package["php-pear"],
-               ]
+               ],
+    returns => [0,1]
   }
   exec {"pear-install-dbunit":
-    command => "pear install --alldeps phpunit/dbunit",
+    command => "pear install --soft --alldeps phpunit/dbunit",
     require => [ Exec["pear-install-phpunit"],
                 Package["php-pear"],
-                ]
+                ],
+    returns => [0,1]
   }
 }
